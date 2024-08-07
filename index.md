@@ -1,7 +1,3 @@
----
-layout: default
----
-
 <style>
 body {
   background-color: #121212; /* Dark background color */
