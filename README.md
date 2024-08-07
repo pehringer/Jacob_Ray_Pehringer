@@ -2,7 +2,7 @@
   body {
     background-color: #111111;
     color: #bbbbbb;
-    font-family: "Consolas", "Courier New", "Courier", "monospace";
+    font-family: 'Consolas', 'Courier New', Courier, monospace !important;
   }
 </style>
 
