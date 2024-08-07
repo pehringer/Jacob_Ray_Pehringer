@@ -2,7 +2,7 @@
   body {
     background-color: #111111;
     color: #bbbbbb;
-    font-family: Courier, monospace;
+    font-family: "Courier", "DejaVu Sans Mono", monospace;
   }
 </style>
 
