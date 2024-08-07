@@ -2,7 +2,7 @@
   body {
     background-color: #111111;
     color: #bbbbbb;
-    font-family: "Courier New", "Courier", "DejaVu Sans Mono", "monospace";
+    font-family: monospace !important;
   }
 </style>
 
