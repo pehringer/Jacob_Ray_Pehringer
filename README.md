@@ -29,12 +29,12 @@ Allowing for visual playback and analysis of helicopter flights.
 
 # Projects
 
-#### CPU Simulator (and assembler): https://github.com/pehringer/spud
+#### CPU Simulator (and assembler): [https://github.com/pehringer/spud](https://github.com/pehringer/spud)
 A Minimal instruction set computer (MISC) of my own design that resembles modern CPU architectures.
 The project includes a CPU simulator and assembler.
 The goal of the project was to provide an easy to understand processor for educational purposes.
 
-#### Neural Network Implementation: https://github.com/pehringer/NerveNet
+#### Neural Network Implementation: [https://github.com/pehringer/NerveNet](https://github.com/pehringer/NerveNet)
 An implementation of a feedforward network using backpropagation for learning.
 Written from scratch using python 3.10, no additional libraries required.
 The goal of the project was mainly to learn the fundamental concepts behind neural networks.
