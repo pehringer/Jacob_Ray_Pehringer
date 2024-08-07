@@ -1,4 +1,9 @@
-<style> body { background-color: #1e1e1e; color: #bbbbbb; } </style>
+<style>
+  body {
+    background-color: #1e1e1e;
+    color: #bbbbbb;
+  }
+</style>
 
 # jacob.ray.pehringer@gmail.com
 
