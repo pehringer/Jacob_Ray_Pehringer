@@ -2,6 +2,7 @@
   body {
     background-color: #1e1e1e;
     color: #bbbbbb;
+    font-family: 'Courier New', Courier, monospace;
   }
 </style>
 
