@@ -1,4 +1,4 @@
-jacob.ray.pehringer@gmail.com#
+jacob.ray.pehringer@gmail.com
 
 # Experience
 
