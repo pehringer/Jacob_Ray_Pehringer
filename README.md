@@ -1,14 +1,6 @@
-<style>
-  body {
-    background-color: #1e1e1e;
-    color: #bbbbbb;
-    font-family: 'Consolas', 'Courier New', Courier, monospace;
-  }
-</style>
+jacob.ray.pehringer@gmail.com#
 
-<h1>jacob.ray.pehringer@gmail.com</h1>
-
-<h2><u>Experience</u></h2>
+# Experience
 
 #### Fidelity Investments - Software Engineer IV (May 2023 - Present)
 Currently developing and maintaining a microservice written in Go that provides market data for stocks, options, and cryptocurrencies.
