@@ -3,6 +3,9 @@
     background-color: #1e1e1e;
     color: #bbbbbb;
   }
+  .repository-content {
+    display: none;
+  }
 </style>
 
 jacob.ray.pehringer@gmail.com
