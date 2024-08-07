@@ -43,3 +43,10 @@ The goal of the project was mainly to learn the fundamental concepts behind neur
 
 #### The University of Utah School of Computing 
 Bachelor's in Computer Science - Graduated December 2022
+
+<style>
+  body {
+    background-color: #111111;
+    color: #bbbbbb;
+  }
+</style>
