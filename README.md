@@ -6,9 +6,9 @@
   }
 </style>
 
-# jacob.ray.pehringer@gmail.com
+<h1>jacob.ray.pehringer@gmail.com</h1>
 
-## Experience
+<h2><u>Experience</u></h2>
 
 #### Fidelity Investments - Software Engineer IV (May 2023 - Present)
 Currently developing and maintaining a microservice written in Go that provides market data for stocks, options, and cryptocurrencies.
@@ -28,7 +28,7 @@ Worked with a small team of developers on a helicopter flight application.
 The application decodes and interpolates helicopter black box data and reproduces the flights (or crashes) in a digital environment.
 Allowing for visual playback and analysis of helicopter flights.
 
-## Projects
+# Projects
 
 #### CPU Simulator (and assembler): https://github.com/pehringer/spud
 A Minimal instruction set computer (MISC) of my own design that resembles modern CPU architectures.
@@ -40,7 +40,7 @@ An implementation of a feedforward network using backpropagation for learning.
 Written from scratch using python 3.10, no additional libraries required.
 The goal of the project was mainly to learn the fundamental concepts behind neural networks.
 
-## Education
+# Education
 
 #### The University of Utah School of Computing 
 Bachelor's in Computer Science - Graduated December 2022
