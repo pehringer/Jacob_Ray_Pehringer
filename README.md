@@ -1,10 +1,3 @@
-<style>
-  body {
-    background-color: #111111;
-    color: #bbbbbb;
-  }
-</style>
-
 jacob.ray.pehringer@gmail.com
 
 # Experience
