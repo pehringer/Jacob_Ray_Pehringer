@@ -1,13 +1,14 @@
 # Go Go ~~Power Rangers~~ Gophers!
 # Plan9 Is Werid
 # Plan9 Crash Course
-Lets Go (haha) over a simple example!
+I always find learning by example to be the most informative.
+So lets Go (haha) over a simple example!
 ```
 CoolBeans
  ┣━ AddInts_amd64.s
  ┗━ main.go
 ```
-Lets do some hardcore low level integer addition with Plan9.
+
 ### AddInts_amd64.s
 ```
 1  // +build amd64
@@ -18,6 +19,18 @@ Lets do some hardcore low level integer addition with Plan9.
 6      ADDL    BX, AX
 7      MOVL    AX, int+16(FP)
 8      RET
+```
+### main.go
+```
+1  package main
+2
+3  import "fmt"
+4
+5  func AddInts(left, right) int
+6
+7  func main() {
+8      fmt.Println("1 + 2 = ", AddInts(1, 2))
+9  }
 ```
 ---
 The file contains x86 specific instructions, so we need to include a Go build tag to make sure Go does not try to compile this file for non x86 machines.
@@ -47,24 +60,12 @@ Go's calling convention (as far as I can tell) is to put the function return val
 8      RET
 ```
 ---
-That was a lot! Luckly its dead easly to use our new nifty Plan9 function in our Go program. 
-### main.go
-```
-1  package main
-2
-3  import "fmt"
-4
-5  func AddInts(left, right) int
-6
-7  func main() {
-8      fmt.Println("1 + 2 = ", AddInts(1, 2))
-9  }
-```
----
+This is the forward functions declaration for our Plan9 function. Since they both share the same name (**AddInts**) Go will link them together during compilation.
 ```
 5  func AddInts(left, right) int
 ```
 ---
+We can now use our Plan9 function just like any other function!
 ```
 8      fmt.Println("1 + 2 = ", AddInts(1, 2))
 ```
