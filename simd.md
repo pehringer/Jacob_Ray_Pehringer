@@ -1,6 +1,7 @@
-# Always Have A Plan B... Or Plan9?
-**Simd Package:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
-
+# Go, Plan9, Simd, 450% Speed Up 
+  
+[github.com/pehringer/simd](https://github.com/pehringer/simd)
+  
 I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects. It allows for some serious number crunching capabilities. But what if I want EVEN MORE POWER?!? Enter SIMD, **S**ame **I**nstruction **M**uliple **D**ata. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However (as far as I can tell) Go's compiler does not utilizes simd. And I cound not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
 
 After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of a assembly format rather than its own language. Plan9 uses the target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format.
@@ -50,7 +51,7 @@ example
 
 **LINE 8**: We can now use our Plan9 function just like any other function.
 
-# My Design Plan . . . . 9
+# My Design Plan.... 9
 Now that we are Go assembly experts I can explane the overall design of my package. ***My main goal for the package was to offer a thin abstraction layer over arithmetic and bitwise simd operations***. Basically I wanted a set of functions that would allow me to perform simd operations on slices.
 
 Let's go over a mini version of my projects.
@@ -63,7 +64,7 @@ example
  ┣━ init_amd64.go
  ┗━ example.go
 ```
-I first created a set of private function pointers with corresponding public functions that wrapped around them. By default the private pointers pointed to fallback software implemations.
+First we will create a private function pointer with a corresponding public function that wraps around it. By default we will point the private pointer to a software implementation of the function.
   
 **example/example.go**: 
 ```
@@ -73,10 +74,122 @@ I first created a set of private function pointers with corresponding public fun
  4     return left + right
  5  }
  6
- 7  var func addInts(left, right) int = fallbackAddInts
+ 7  var addInts func(left, right) int = fallbackAddInts
  8
  9  func AddInts(left, right) int {
-10    return addInts(left, right)  
+10      return addInts(left, right)  
 11  }
 ```
-I then create internal packages that contained the arciticuture spefic Plan9 functions:
+Next we create an internal package that contains an architecture specific Plan9 implementation of our function.
+  
+**example/internal/addition/AddInts_amd64.s**
+```
+1  // +build amd64
+2
+3  TEXT ·AddInts(SB), 4, $0
+4      MOVL    left+0(FP), AX
+5      MOVL    right+8(FP), BX
+6      ADDL    BX, AX
+7      MOVL    AX, int+16(FP)
+8      RET
+```
+**example/internal/addition/addition_amd64.go**
+```
+1  // +build amd64
+2
+3  package addition
+4 
+5  func AddInts(left, right) int
+```
+Lastly we will create an init function to configure the private function pointer with our internal packages corresponding Plan9 function.
+  
+**example/init_amd64.go**
+```
+1  // +build amd64
+2
+3  package example
+4
+5  import "example/internal/addition"
+6 
+7  addInts = addition.AddInts
+```
+**TLDR** The use of a private function pointer combined with architecture specific init functions and packages (using Go build tags) allows our example package to support multiple architectures easily!
+
+# Some Juicy Simd
+Now will all the gunk loaded into your mind I will let you decipher some of my x86 simd plan9 functions.
+
+**[simd/internal/sse/Supported_amd64.s](https://github.com/pehringer/simd/blob/main/internal/sse/Supported_amd64.s)**
+```
+ 1  // +build amd64
+ 2
+ 3  // func Supported() bool
+ 4  TEXT ·Supported(SB), 4, $0
+ 5    //Check SSE supported.
+ 6    MOVQ    $1, AX
+ 7    CPUID
+ 8    TESTQ   $(1<<25), DX
+ 9    JZ      sseFalse
+10    //sseTrue:
+11    MOVB    $1, bool+0(FP)
+12    RET
+13  sseFalse:
+14    MOVB    $0, bool+0(FP)
+15    RET
+```
+**[simd/internal/sse/AddFloat32_amd64.s]()**
+```
+ 1  // +build amd64
+ 2
+ 3  // func AddFloat32(left, right, result []float32) int
+ 4  TEXT ·AddFloat32(SB), 4, $0
+ 5      //Load slices lengths.
+ 6      MOVQ    leftLen+8(FP), AX
+ 7      MOVQ    rightLen+32(FP), BX
+ 8      MOVQ    resultLen+56(FP), CX
+ 9      //Get minimum length.
+10      CMPQ    AX, CX
+11      CMOVQLT AX, CX
+12      CMPQ    BX, CX
+13      CMOVQLT BX, CX
+14      //Load slices data pointers.
+15      MOVQ    leftData+0(FP), SI
+16      MOVQ    rightData+24(FP), DX
+17      MOVQ    resultData+48(FP), DI
+18      //Initialize loop index.
+19      MOVQ    $0, AX
+20  multipleDataLoop:
+21      MOVQ    CX, BX
+22      SUBQ    AX, BX
+23      CMPQ    BX, $4
+24      JL      singleDataLoop
+25      //Add four float32 values.
+26      MOVUPS  (SI)(AX*4), X0
+27      MOVUPS  (DX)(AX*4), X1
+28      ADDPS   X1, X0
+29      MOVUPS  X0, (DI)(AX*4)
+30      ADDQ    $4, AX
+31      JMP     multipleDataLoop
+32  singleDataLoop:
+33      CMPQ    AX, CX
+34      JGE     returnLength
+35      //Add one float32 value.
+36      MOVSS   (SI)(AX*4), X0
+37      MOVSS   (DX)(AX*4), X1
+38      ADDSS   X1, X0
+39      MOVSS   X0, (DI)(AX*4)
+40      INCQ    AX
+41      JMP     singleDataLoop
+42  returnLength:
+43      MOVQ    CX, int+72(FP)
+44      RET
+```
+# Performace And The Future
+I promise all this junk is worth it! A made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. Currently my package only supports 64-bit x86 machines. If there is enough interest I will throw in some 64-bit ARM support as well!
+  
+**Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
+  
+**Simd Docs:** [pkg.go.dev/github.com/pehringer/simd](https://pkg.go.dev/github.com/pehringer/simd)
+  
+![Large Vectors](images/LargeVectorsFloat32Addition.png)
+![Medium Vectors](images/MediumVectorsFloat32Addition.png)
+![Large Vectors](images/SmallVectorsFloat32Addition.png)  
