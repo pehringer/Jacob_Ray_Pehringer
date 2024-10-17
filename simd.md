@@ -2,9 +2,9 @@
   
 [github.com/pehringer/simd](https://github.com/pehringer/simd)
   
-I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects. It allows for some serious number crunching capabilities. But what if I want EVEN MORE POWER?!? Enter SIMD, **S**ame **I**nstruction **M**uliple **D**ata. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However (as far as I can tell) Go's compiler does not utilizes simd. And I cound not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
+I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities. But what if I wanted EVEN MORE POWER?!? Enter SIMD, **S**ame **I**nstruction **M**uliple **D**ata ["sim"-"dee"]. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However, (as far as I can tell) Go's compiler does not utilizes simd, and I cound not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
 
-After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of a assembly format rather than its own language. Plan9 uses the target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format.
+After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of an assembly format than its own language. Plan9 uses target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall, pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format? 
 # Plan9 Crash Course
 I always find learning by example to be the most informative.
 So lets Go (haha) over a simple example.
@@ -52,9 +52,9 @@ example
 **LINE 8**: We can now use our Plan9 function just like any other function.
 
 # My Design Plan.... 9
-Now that we are Go assembly experts I can explane the overall design of my package. ***My main goal for the package was to offer a thin abstraction layer over arithmetic and bitwise simd operations***. Basically I wanted a set of functions that would allow me to perform simd operations on slices.
+Now that we are Go assembly experts, let's get into the details of how I structured the package. ***My main goal for the package was to offer a thin abstraction layer over arithmetic and bitwise simd operations***. Basically, I wanted a set of functions that would allow me to perform simd operations on slices.
 
-Let's go over a mini version of my projects.
+Here's a look at a simplified example of my project structure.
 ```
 example
  ┣━ internal
@@ -64,7 +64,7 @@ example
  ┣━ init_amd64.go
  ┗━ example.go
 ```
-First we will create a private function pointer with a corresponding public function that wraps around it. By default we will point the private pointer to a software implementation of the function.
+First, we will create a private function pointer with a corresponding public function that wraps around it. By default we will point the private pointer to a software implementation of the function.
   
 **example/example.go**: 
 ```
@@ -80,7 +80,7 @@ First we will create a private function pointer with a corresponding public func
 10      return addInts(left, right)  
 11  }
 ```
-Next we create an internal package that contains an architecture specific Plan9 implementation of our function.
+Next, we create an internal package that contains an architecture specific Plan9 implementation of our function.
   
 **example/internal/addition/AddInts_amd64.s**
 ```
@@ -101,7 +101,7 @@ Next we create an internal package that contains an architecture specific Plan9 
 4 
 5  func AddInts(left, right) int
 ```
-Lastly we will create an init function to configure the private function pointer with our internal packages corresponding Plan9 function.
+Lastly, we will create an init function to configure the private function pointer with our internal packages corresponding Plan9 function.
   
 **example/init_amd64.go**
 ```
@@ -184,7 +184,7 @@ Now will all the gunk loaded into your mind I will let you decipher some of my x
 44      RET
 ```
 # Performace And The Future
-I promise all this junk is worth it! A made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. Currently my package only supports 64-bit x86 machines. If there is enough interest I will throw in some 64-bit ARM support as well!
+I promise all this gunk is worth it! I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. Currently, my package only supports 64-bit x86 machines. If there is enough interest, I will throw in some 64-bit ARM support as well!
   
 **Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
   
