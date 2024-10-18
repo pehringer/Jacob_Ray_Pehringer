@@ -67,13 +67,13 @@ First, we will create a private function pointer with a corresponding public fun
 ```
  1  package example
  2
- 3  func fallbackAddInts(left, right) int {
+ 3  func fallbackAddInts(left, right int) int {
  4     return left + right
  5  }
  6
- 7  var addInts func(left, right) int = fallbackAddInts
+ 7  var addInts func(left, right int) int = fallbackAddInts
  8
- 9  func AddInts(left, right) int {
+ 9  func AddInts(left, right int) int {
 10      return addInts(left, right)  
 11  }
 ```
@@ -96,7 +96,7 @@ Next, we create an internal package that contains an architecture specific Plan9
 2
 3  package addition
 4 
-5  func AddInts(left, right) int
+5  func AddInts(left, right int) int
 ```
 Lastly, we will create an init function to configure the private function pointer with our internal packages corresponding Plan9 function.
   
@@ -108,7 +108,9 @@ Lastly, we will create an init function to configure the private function pointe
 4
 5  import "example/internal/addition"
 6 
-7  addInts = addition.AddInts
+7  func init() {
+8      addInts = addition.AddInts
+9  }
 ```
 **TLDR** The use of a private function pointer combined with architecture specific init functions and packages (using Go build tags) allows our example package to support multiple architectures easily!
 # Some Juicy Simd
