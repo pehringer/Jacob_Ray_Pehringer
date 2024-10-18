@@ -1,7 +1,4 @@
 # Go Plan9 Memo, Speeding Up Calculations 450%
-  
-[github.com/pehringer/simd](https://github.com/pehringer/simd)
-  
 I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities. But what if I wanted EVEN MORE POWER?!? Enter SIMD, **S**ame **I**nstruction **M**uliple **D**ata ["sim"-"dee"]. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However, (as far as I can tell) Go's compiler does not utilizes simd, and I cound not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
 
 After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of an assembly format than its own language. Plan9 uses target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall, pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format? 
@@ -191,6 +188,6 @@ I promise all this gunk is worth it. I made a few charts so you can see the perf
   
 Currently, my package only supports 64-bit x86 machines. If there is enough interest, I will throw in some 64-bit ARM support as well!
   
-![Large Vectors](images/LargeVectorsFloat32Addition.png)
-![Medium Vectors](images/MediumVectorsFloat32Addition.png)
-![Large Vectors](images/SmallVectorsFloat32Addition.png)  
+![Large Vectors](go_plan9_memo/LargeVectorsFloat32Addition.png)
+![Medium Vectors](go_plan9_memo/MediumVectorsFloat32Addition.png)
+![Large Vectors](go_plan9_memo/SmallVectorsFloat32Addition.png)  
