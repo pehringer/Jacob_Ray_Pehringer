@@ -183,7 +183,7 @@ Now with all that gunk loaded into your mind I will let you decipher some of my 
 44      RET
 ```
 # Performace And The Future
-I promise all this gunk is worth it. I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. I hope this memo inspires others to use Plan9 and simd in their future projects!
+I promise all this gunk is worth it. I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. There is roughly a 200-450% speed up depending on the number of elements. I hope this memo inspires others to use Plan9 and simd in their future projects!
   
 - **Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
 - **Simd Docs:** [pkg.go.dev/github.com/pehringer/simd](https://pkg.go.dev/github.com/pehringer/simd)
