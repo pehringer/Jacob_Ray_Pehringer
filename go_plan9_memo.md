@@ -135,7 +135,7 @@ Now with all that gunk loaded into your mind I will let you decipher some of my 
 15    RET
 ```
   
-**[simd/internal/sse/AddFloat32_amd64.s]()**
+**[simd/internal/sse/AddFloat32_amd64.s](https://github.com/pehringer/simd/blob/main/internal/sse/AddFloat32_amd64.s)**
 ```
  1  // +build amd64
  2
