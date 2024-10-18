@@ -1,4 +1,4 @@
-# Go, Plan9, Simd, 450% Speed Up 
+# Go Plan9 Memo, Speeding Up Calculations 450%
   
 [github.com/pehringer/simd](https://github.com/pehringer/simd)
   
@@ -53,7 +53,7 @@ example
 
 # My Design Plan.... 9
 Now that we are Go assembly experts, let's get into the details of how I structured the package. ***My main goal for the package was to offer a thin abstraction layer over arithmetic and bitwise simd operations***. Basically, I wanted a set of functions that would allow me to perform simd operations on slices.
-
+  
 Here's a look at a simplified example of my project structure.
 ```
 example
@@ -114,10 +114,9 @@ Lastly, we will create an init function to configure the private function pointe
 7  addInts = addition.AddInts
 ```
 **TLDR** The use of a private function pointer combined with architecture specific init functions and packages (using Go build tags) allows our example package to support multiple architectures easily!
-
 # Some Juicy Simd
-Now will all the gunk loaded into your mind I will let you decipher some of my x86 simd plan9 functions.
-
+Now with all that gunk loaded into your mind I will let you decipher some of my x86 simd plan9 functions.
+  
 **[simd/internal/sse/Supported_amd64.s](https://github.com/pehringer/simd/blob/main/internal/sse/Supported_amd64.s)**
 ```
  1  // +build amd64
@@ -136,6 +135,7 @@ Now will all the gunk loaded into your mind I will let you decipher some of my x
 14    MOVB    $0, bool+0(FP)
 15    RET
 ```
+  
 **[simd/internal/sse/AddFloat32_amd64.s]()**
 ```
  1  // +build amd64
@@ -184,11 +184,12 @@ Now will all the gunk loaded into your mind I will let you decipher some of my x
 44      RET
 ```
 # Performace And The Future
-I promise all this gunk is worth it! I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. Currently, my package only supports 64-bit x86 machines. If there is enough interest, I will throw in some 64-bit ARM support as well!
+I promise all this gunk is worth it. I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. I hope this memo inspires others to use Plan9 and simd in their future projects!
   
-**Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
+- **Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
+- **Simd Docs:** [pkg.go.dev/github.com/pehringer/simd](https://pkg.go.dev/github.com/pehringer/simd)
   
-**Simd Docs:** [pkg.go.dev/github.com/pehringer/simd](https://pkg.go.dev/github.com/pehringer/simd)
+Currently, my package only supports 64-bit x86 machines. If there is enough interest, I will throw in some 64-bit ARM support as well!
   
 ![Large Vectors](images/LargeVectorsFloat32Addition.png)
 ![Medium Vectors](images/MediumVectorsFloat32Addition.png)
