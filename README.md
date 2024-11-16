@@ -15,24 +15,22 @@ Developed Python scripts that controlled robotic calibration fixtures.
 Enabling faster calibration of embedded sensors.
 Also converted Python algorithms from the in-house data science team into C++ implementations for production use.
 
-#### PerspectX, Contract Worker <br> August 2021 - December 2021
-Worked with a small team of developers on a helicopter flight application.
-The application decodes and interpolates helicopter black box data and reproduces the flights (or crashes) in a digital environment.
-Allowing for visual playback and analysis of helicopter flights.
-
 # Projects
+
+#### Go SIMD Package: <br> [https://github.com/pehringer/simd](https://github.com/pehringer/simd)
+SIMD support via Go assembly for efficient arithmetic and bitwise operations.
+Enables parallel element-wise computations, achieving a ***200-470%*** speedup on amd64 (x86_64) and arm64 architectures.
 
 #### CPU Simulator (and assembler): <br> [https://github.com/pehringer/spud](https://github.com/pehringer/spud)
 A Minimal instruction set computer (MISC) of my own design that resembles modern CPU architectures.
 The project includes a CPU simulator and assembler.
 The goal of the project was to provide an easy to understand processor for educational purposes.
 
-#### Neural Network Implementation: <br> [https://github.com/pehringer/nerve_net](https://github.com/pehringer/nerve_net)
-An implementation of a feedforward network using backpropagation for learning.
-Written from scratch using python 3.10, no additional libraries required.
-The goal of the project was mainly to learn the fundamental concepts behind neural networks.
-
 # Education
 
 #### The University of Utah School of Computing 
 Bachelor's in Computer Science - Graduated December 2022
+
+# Miscellaneous
+
+#### Top Post on [Hacker News](https://news.ycombinator.com/) 2024-10-18
