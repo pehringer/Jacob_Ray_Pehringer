@@ -1,5 +1,10 @@
+### ***Post Publication Corrections***
+- ***After posting this memo, it has come to my attention that Go's assembly language is referred to as "Go assembly" and not "Plan9". Plan9 refers to an older assembly syntax from which Go assembly is derived.***
+
+---
+
 # Go Plan9 Memo, Speeding Up Calculations 450%
-I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities. But what if I wanted EVEN MORE POWER?!? Enter SIMD, **S**ame **I**nstruction **M**uliple **D**ata ["sim"-"dee"]. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However, (as far as I can tell) Go's compiler does not utilizes simd, and I cound not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
+I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities. But what if I wanted EVEN MORE POWER?!? Enter SIMD, **S**ingle **I**nstruction **M**ultiple **D**ata ["sim"-"dee"]. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However, (as far as I can tell) Go's compiler does not utilize simd, and I could not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
 
 After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of an assembly format than its own language. Plan9 uses target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall, pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format? 
 # Plan9 Crash Course
@@ -23,7 +28,7 @@ example
 ```
 **LINE 1**: The file contains ```amd64``` specific instructions, so we need to include a Go build tag to make sure Go does not try to compile this file for non x86 machines.
 
-**LINE 3**: You can think of this line as the functions declaration. ```TEXT``` declares that this is a function or text section. ```·AddInts(SB)``` specifies our functions name. ```4``` represents "NOSPLIT" which we need for some reason. And ```$0``` is the size of the function's stack frame (used for local variables). It's zero in this case because we can easily fit everything into the registers.
+**LINE 3**: You can think of this line as the function declaration. ```TEXT``` declares that this is a function or text section. ```·AddInts(SB)``` specifies our functions name. ```4``` represents "NOSPLIT" which we need for some reason. And ```$0``` is the size of the function's stack frame (used for local variables). It's zero in this case because we can easily fit everything into the registers.
 
 **LINE 4 & 5**: Go's calling convention is to put the function arguments onto the stack. So we ```MOV```e both ```L```ong 32-bit values into the ```AX``` and ```BX``` registers by dereferencing the frame pointer (```FP```) with the appropriate offsets. The first argument is stored at offset ```0```. The second argument is stored at offset ```8``` (int’s only need 4 bytes but I think Go offsets all arguments by 8 to maintain memory alignment).
 
@@ -44,7 +49,7 @@ example
 9  }
 ```
 
-**LINE 5**: This is the forward functions declaration for our Plan9 function. Since they both share the same name (```AddInts```) Go will link them together during compilation.
+**LINE 5**: This is the forward function declaration for our Plan9 function. Since they both share the same name (```AddInts```) Go will link them together during compilation.
 
 **LINE 8**: We can now use our Plan9 function just like any other function.
 
@@ -112,7 +117,7 @@ Lastly, we will create an init function to configure the private function pointe
 8      addInts = addition.AddInts
 9  }
 ```
-**TLDR** The use of a private function pointer combined with architecture specific init functions and packages (using Go build tags) allows our example package to support multiple architectures easily!
+**TLDR** The use of a private function pointer combined with architecture specific init function allows our example package to support multiple architectures easily!
 # Some Juicy Simd
 Now with all that gunk loaded into your mind I will let you decipher some of my x86 simd plan9 functions.
   
@@ -182,7 +187,7 @@ Now with all that gunk loaded into your mind I will let you decipher some of my 
 43      MOVQ    CX, int+72(FP)
 44      RET
 ```
-# Performace And The Future
+# Performance And The Future
 I promise all this gunk is worth it. I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation. There is roughly a 200-450% speed up depending on the number of elements. I hope this memo inspires others to use Plan9 and simd in their future projects!
   
 - **Simd Repo:** [github.com/pehringer/simd](https://github.com/pehringer/simd)
@@ -190,6 +195,6 @@ I promise all this gunk is worth it. I made a few charts so you can see the perf
   
 Currently, my package only supports 64-bit x86 machines. If there is enough interest, I will throw in some 64-bit ARM support as well!
   
-![Large Vectors](go_plan9_memo/LargeVectorsFloat32Addition.png)
-![Medium Vectors](go_plan9_memo/MediumVectorsFloat32Addition.png)
-![Large Vectors](go_plan9_memo/SmallVectorsFloat32Addition.png)  
+![Large Vectors](go_plan9_memo/largeVectorsFloat32AdditionAmd64.png)
+![Medium Vectors](go_plan9_memo/mediumVectorsFloat32AdditionAmd64.png)
+![Small Vectors](go_plan9_memo/smallVectorsFloat32AdditionAmd64.png)

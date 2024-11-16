@@ -34,3 +34,4 @@ Bachelor's in Computer Science - Graduated December 2022
 # Miscellaneous
 
 #### Top Post on [Hacker News](https://news.ycombinator.com/) 2024-10-18
+![screenshot](README/hackerNews2024-10-18.png)
