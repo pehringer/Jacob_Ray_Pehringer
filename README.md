@@ -19,7 +19,7 @@ Also converted Python algorithms from the in-house data science team into C++ im
 
 #### Go SIMD Package: <br> [https://github.com/pehringer/simd](https://github.com/pehringer/simd)
 SIMD support via Go assembly for efficient arithmetic and bitwise operations.
-Enables parallel element-wise computations, achieving a ***200-470%*** speedup on amd64 (x86_64) and arm64 architectures.
+Enables parallel element-wise computations, achieving a ***100% to 400%*** speedup on amd64 (x86_64) and arm64 architectures.
 
 #### CPU Simulator (and assembler): <br> [https://github.com/pehringer/spud](https://github.com/pehringer/spud)
 A Minimal instruction set computer (MISC) of my own design that resembles modern CPU architectures.
