@@ -31,7 +31,7 @@ The goal of the project was to provide an easy to understand processor for educa
 #### The University of Utah School of Computing 
 Bachelor's in Computer Science - Graduated December 2022
 
-# Miscellaneous
+# Achievements
 
-#### Top Post on [Hacker News](https://news.ycombinator.com/) 2024-10-18
+#### Top Post on [Hacker News](https://news.ycombinator.com/) 2024-10-18 <br> [https://pehringer.info/go_plan9_memo](https://pehringer.info/go_plan9_memo)
 ![screenshot](README/hackerNews2024-10-18.png)
