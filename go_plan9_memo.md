@@ -4,6 +4,8 @@
 ---
 
 # Go Plan9 Memo, Speeding Up Calculations 450%
+October 18, 2024
+
 I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities. But what if I wanted EVEN MORE POWER?!? Enter SIMD, **S**ingle **I**nstruction **M**ultiple **D**ata ["sim"-"dee"]. Simd instructions allow for parallel number crunching capabilities right down at the hardware level. Many programming languages either have compiler optimizations that use simd or libraries that offer simd support. However, (as far as I can tell) Go's compiler does not utilize simd, and I could not find a general propose simd package that I liked. ***I just want a package that offers a thin abstraction layer over arithmetic and bitwise simd operations***. So like any good programmer I decided to slightly reinvent the wheel and write my very own simd package. How hard could it be?
 
 After doing some preliminary research I discovered that Go uses its own internal assembly language called Plan9. I consider it more of an assembly format than its own language. Plan9 uses target platforms instructions and registers with slight modifications to their names and usage. This means that x86 Plan9 is different then say arm Plan9. Overall, pretty weird stuff. I am not sure why the Go team went down this route. Maybe it simplifies the compiler by having this bespoke assembly format? 
