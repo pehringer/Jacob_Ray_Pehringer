@@ -35,7 +35,7 @@ The state for each cell is determined by four rules:
   t = 0     t = 1     t = 2     t = 3     t = 4
 ```
 
-***glider pattern - traverses the grid diagonally***
+**glider pattern**
 
 With just these two states and four rules, the Game of Life is technically Turing-complete, meaning it could, in theory, compute anything given enough time and grid space!
 
@@ -64,7 +64,7 @@ This evaluation, selection, reproduction, and mutation cycle repeats over and ov
 
 ![htop Screenshot](code_creation/htopScreenshot.png)
 
-***htop command - project thread and memory usage***
+**htop command**
 
 So I started creating a GA that could evolve CAs.
 But then I got to thinking, rules are basically just instructions right?
