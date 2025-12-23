@@ -4,6 +4,9 @@
 
 "Object-oriented design is the roman numerals of computing."
                                                  - Rob Pike
+
+"When in doubt, use brute force."
+                  - Ken Thompson
 ```
 
 ### Resume:
