@@ -1,4 +1,3 @@
-# Resume
 jacob.ray.pehringer@gmail.com
 
 # Experience
