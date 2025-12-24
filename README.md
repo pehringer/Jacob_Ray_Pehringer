@@ -4,9 +4,8 @@
 
 "The speed of light sucks."<br>***John Carmack***
 
-## Resume:
-- [pehringer.info/resume](https://pehringer.info/resume)
+### [Pehringer.info/resume](https://pehringer.info/resume)
 
-## Articles: (Latest to Oldest)
+### Articles:
 - [Code Creation, The Way Nature Intended](https://pehringer.info/code_creation)
 - [Go Plan9 Memo, Speeding Up Calculations 450%](https://pehringer.info/go_plan9_memo)
