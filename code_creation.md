@@ -73,12 +73,12 @@ What if I evolved small programs instead? This is when my project took off.
 
 This launched me into four months of researching, developing, and testing a general purpose problem solving program.
 I am pretty happy with the results.
-Below is the README as of the posting of this write up.
+Below is the contents of the projects README as of the posting of this write up.
 It's short and sweet, describing what it is, and how to use it.
 
 While **I'm not an expert in the field of [Linear Genetic Programming (LGP)](https://en.wikipedia.org/wiki/Linear_genetic_programming)** the README also documents what I think are the novel approaches I took in the project (maybe they're not novel and I'm just illiterate).
 
-# [github.com/pehringer/finches](https://github.com/pehringer/finches) / README.md
+# [github.com/pehringer/finches](https://github.com/pehringer/finches)/README.md
 
 ```
 
