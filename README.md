@@ -10,12 +10,14 @@
 ---
 
 ### [pehringer.info/code_creation](https://pehringer.info/code_creation)
+
 Code Creation, The Way Nature Intended\
 July 24, 2025
 
 ---
 
 ### [pehringer.info/go_plan9_memo](https://pehringer.info/go_plan9_memo)
+
 Go Plan9 Memo, Speeding Up Calculations 450%\
 October 18, 2024
 
