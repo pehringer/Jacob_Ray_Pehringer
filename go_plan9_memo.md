@@ -1,10 +1,12 @@
 ### ***Post Publication Corrections***
+
 - ***After posting this memo, it has come to my attention that Go's assembly language is referred to as "Go assembly" and not "Plan9".
   Plan9 refers to an older assembly syntax from which Go assembly is derived.***
 
 ---
 
 # Go Plan9 Memo, Speeding Up Calculations 450%
+
 October 18, 2024
 
 I want to take advantage of Go's concurrency and parallelism for some of my upcoming projects, allowing for some serious number crunching capabilities.
@@ -25,6 +27,7 @@ I am not sure why the Go team went down this route.
 Maybe it simplifies the compiler by having this bespoke assembly format? 
 
 # Plan9 Crash Course
+
 I always find learning by example to be the most informative.
 So lets Go (haha) over a simple example.
 ```
@@ -219,6 +222,7 @@ Now with all that gunk loaded into your mind I will let you decipher some of my 
 44      RET
 ```
 # Performance And The Future
+
 I promise all this gunk is worth it.
 I made a few charts so you can see the performance difference between a Go software implementation and a Plan9 simd implementation.
 There is roughly a 200-450% speed up depending on the number of elements.
