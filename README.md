@@ -1,14 +1,12 @@
-```
-"Computer Science is no more about computers than
- astronomy is about telescopes." - Edsger Dijkstra
+"Computer Science is no more about computers than astronomy is about telescopes."<br>***Edsger Dijkstra***
 
-"Object-oriented design is the roman numerals of
- computing." - Rob Pike
-```
+"Object-oriented design is the roman numerals of computing."<br>***Rob Pike***
 
-### Resume:
+"The speed of light sucks."<br>***John Carmack***
+
+## Resume:
 - [pehringer.info/resume](https://pehringer.info/resume)
 
-### Articles: (Latest to Oldest)
+## Articles: (Latest to Oldest)
 - [Code Creation, The Way Nature Intended](https://pehringer.info/code_creation)
 - [Go Plan9 Memo, Speeding Up Calculations 450%](https://pehringer.info/go_plan9_memo)
