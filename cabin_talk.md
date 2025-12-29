@@ -1,4 +1,6 @@
-# Principles of Evolution 
+# Principles of Evolution
+
+December 28, 2025
 
 Nature is the world's oldest and most successful engineer.
 To understand how the Finches project works, we first look at the major pillars of Biological Evolution
@@ -227,3 +229,78 @@ This design choice provides a more incremental and continuous path for forming c
 
 # Optimizing The Genetic Algorithm for Evolvability
 
+### Beyond Crossover: Fission & Transfer
+
+- **The Problem with Crossover:** Imagine taking two different cake recipes, cutting them in half, and taping them together. You probably won't get a cake.
+- **The Finches Solution:**
+  + Fission: A high-performing "parent" simply clones itself.
+  + Transfer: A small, random "block" of code is taken from a random donor and inserted into the offspring.
+- **The Result:** This maintains the "working" core of a program while introducing small, functional snippets from others.
+
+### Selection & Replacement Strategy
+
+- **Tournament Selection:** Two neighboring individuals are compared.
+- **The "Loser" is Replaced:**
+  + The individual with the lower fitness is removed.
+  + If fitness is tied, the longer program is removed (this keeps the code efficient).
+- **Robust Local Exploration:** By selecting "neighbors" the algorithm ensures that the population doesn't all become identical too quickly, allowing different "pockets" of solutions to evolve independently.
+
+### Design Philosophy: The "Smooth" Path
+
+- **Simplified Overhead:** Simple selection and replacement mean more CPU cycles are spent on evolving and less on managing the population.
+- **Reduced Memory Allocation:** By reusing existing program slots in the population, Finches runs extremely fast.
+- **Computational Efficiency:** By turning "if/else" logic into math and "crossover" into "transfer," we move away from a jagged landscape of crashes and toward a smooth landscape of incremental improvements.
+
+# Use Cases
+
+- **Reverse Engineering** - Infer hidden logic from observed inputs and outputs, even when source code or hardware is unavailable.
+
+- **Data Compression** - Evolve compact functions that approximate large datasets, allowing for significant reductions in storage.
+
+# Use Finches
+
+Run the Makefile to build finches:
+```
+$ make
+go build -o finches
+```
+
+Create a **examples.csv** file where each line contains **ONE to EIGHT example inputs followed by ONE expected output**.
+
+A **examples.csv** file for a three input function:
+```
+2.175702178,3.4978843946,2.8679357454,42.7201735336
+3.727866762,4.6107086188,-3.4225095225,70.7890623513
+-1.6914281809,-4.2087394179,2.475850641,39.3184982846
+0.4793454968,3.6758416723,-2.3773138762,24.9995146063
+2.0264537683,-0.8547617596,-4.7856914722,68.217804457
+-3.1671669278,-0.8226972678,-3.4907083169,49.9335397455
+0.5837987947,-4.7796641015,-4.1819232422,51.3009229327
+-3.8194496568,-0.2562750524,4.7254929564,77.767960022
+-3.2942570245,2.4734392713,1.5534051521,-0.7628296637
+-0.2975551098,-4.5018374909,0.5470816154,8.8745394888
+0.8429004267,2.4176065495,-2.1438009046,22.0203497133
+-0.8824430962,0.9755978955,0.7106055863,5.6755047387
+-2.0692284587,-1.6842422241,-2.8357669579,38.1641150601
+0.557997777,-4.339746829,-0.99579524,2.5736885366
+4.4987170938,2.2281464346,4.1271759253,71.6496271677
+3.9986431397,1.2608830478,-0.2652827417,11.2961243578
+```
+
+The above file contains 16 input-output examples, ideally you want at least 256 examples.
+
+Run finches on **examples.csv**, adjust the **--generations** and or **--individuals** counts if the resulting ```function.go``` is not accurate enough:
+```
+$ ./finches examples.csv --generations 4096 --individuals 1024
+100.0% -> function.go
+```
+
+Genetic algorithms at their core rely on randomness so your result may vary.
+
+Finches will evolve a function to fit the input-output examples and create a **function.go** file with equivalent Go code.
+
+Executing **function.go** with the first example from **examples.csv**:
+```
+$ go run function.go 2.175702178 3.4978843946 2.8679357454
+42.720173532676014
+```
