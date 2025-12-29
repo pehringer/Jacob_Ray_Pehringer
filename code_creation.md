@@ -1,4 +1,5 @@
 # Code Creation, The Way Nature Intended
+
 July 24, 2025
 
 After finishing my [last project](https://github.com/pehringer/simd) I felt a bit on edge.
@@ -14,7 +15,6 @@ So I shifted my focus to some sort of visualization project.
 The underlying matrix operations of older network architectures are simple enough to understand.
 I even managed to get some pretty solid results with NumPy and Matplotlib.
 But the whole idea felt a bit forced, I was working on the very thing that filled me with existential dread.
-
 
 Then I rediscovered John [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) after watching a recommended [video of the game simulating itself](https://www.youtube.com/watch?v=xP5-iIeKXE8), crazy!
 The game is simple, it takes place on a grid.
@@ -94,7 +94,6 @@ The name finches comes from Darwin's finches, the canonical example of the Theor
 # Use Cases
 
 - **Reverse Engineering** - Infer hidden logic from observed inputs and outputs, even when source code or hardware is unavailable.
-
 - **Data Compression** - Evolve compact functions that approximate large datasets, allowing for significant reductions in storage.
 
 # Use Finches
@@ -222,6 +221,7 @@ These two operators simulate horizontal gene transfer resulting minimal breakage
 Additionally, the **selection and replacement operators are designed to slow down premature convergence** and enable robust local exploration. While their simplicity allows for fast execution and reduced memory allocations.
 
 ### Algorithm:
+
 - **Initialization:** Create a population of individuals. Each individual contains a very low fitness score, multiple (sixteen) random constants, and a single random instruction.
 - **Loop:**
   + **Selection:** Two neighboring parents are randomly selected from the population. A separate donor individual is also randomly selected from the population.
