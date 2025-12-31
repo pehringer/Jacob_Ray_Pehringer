@@ -46,6 +46,6 @@ Bachelor's in Computer Science.
 # Achievements
 
 **Top Post on [Hacker News](https://news.ycombinator.com/) 2024-10-18**\
-**[https://pehringer.info/go_plan9_memo](https://pehringer.info/go_plan9_memo)**
+**[https://pehringer.net/go_plan9_memo](https://pehringer.net/go_plan9_memo)**
 
 ![screenshot](resume/hackerNews2024-10-18.png)
