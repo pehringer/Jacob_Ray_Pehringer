@@ -24,3 +24,6 @@ October 18, 2024
 ---
 
 ### [pehringer.net/resume](https://pehringer.net/resume)
+
+[```<< Previous```](https://gskr.ing/u/pehringer/pred)
+[```Next >>```](https://gskr.ing/u/pehringer/succ)
