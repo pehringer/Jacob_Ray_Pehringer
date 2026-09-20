@@ -3,34 +3,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap");
 @import "jekyll-theme-primer";
 
-/* ============================================================
-   Advent of Code look: navy background, gray text, green links,
-   glowing white emphasis. Colors and fonts only.
-   ============================================================ */
+// Advent of Code look: navy background, gray text, green links.
 
-$bg:        #0f0f23;   // page background
-$bg-code:   #10101a;   // code blocks
-$text:      #cccccc;   // body text
-$muted:     #666666;   // quotes, secondary text
-$border:    #333340;   // rules, table borders
-$link:      #009900;
-$link-hot:  #99ff99;
-$logo:      #00cc00;   // site title
-$white:     #ffffff;
-$star:      #ffff66;   // gold, used for *emphasis*
+$bg:     #0f0f23;
+$panel:  #10101a;
+$text:   #cccccc;
+$muted:  #666666;
+$border: #333340;
+$link:   #009900;
+$hot:    #99ff99;
+$white:  #ffffff;
+$gold:   #ffff66;
+$glow:   0 0 3px currentColor;
 
-html {
-  color-scheme: dark;
-}
-
-html, body {
-  background: $bg;
-}
+html, body { background: $bg; }
+html { color-scheme: dark; }
 
 body {
   color: $text;
-  font-family: "Source Code Pro", ui-monospace, "Cascadia Mono", Menlo,
-               Consolas, "Courier New", monospace;
+  font-family: "Source Code Pro", ui-monospace, Menlo, Consolas, monospace;
   font-size: 14pt;
   font-weight: 300;
   line-height: 1.5;
@@ -39,144 +30,53 @@ body {
 .markdown-body {
   background: transparent;
   color: $text;
-  font-family: inherit;
-  font-size: inherit;
+  font: inherit;
 }
 
-/* ---- site title (the first h1) glows green like the AoC logo ---- */
-.markdown-body > h1:first-child {
-  border: 0;
-  font-size: 1.4em;
-  font-weight: 400;
-}
-.markdown-body > h1:first-child a,
-.markdown-body > h1:first-child a:visited {
-  color: $logo;
-  text-shadow: 0 0 2px $logo, 0 0 5px $logo;
-}
-.markdown-body > h1:first-child a:hover,
-.markdown-body > h1:first-child a:focus {
-  color: $link-hot;
-  text-shadow: 0 0 2px $link-hot, 0 0 5px $link-hot;
-}
-
-/* ---- headings: plain white text, no added characters ---- */
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  color: $white;
-  font-family: inherit;
-  font-size: 1em;
-  font-weight: 400;
-  border: 0;
-  margin: 1.6em 0 0.8em;
-}
-.markdown-body > h1:not(:first-child) {
-  font-size: 1.2em;
-}
-
-/* ---- links ---- */
-.markdown-body a,
-.markdown-body a:visited {
+// site title
+.markdown-body > h1:first-child a {
   color: $link;
-  text-decoration: none;
+  text-shadow: $glow;
 }
-.markdown-body a:hover,
-.markdown-body a:focus {
-  color: $link-hot;
-  text-decoration: none;
-  cursor: pointer;
-}
+.markdown-body > h1:first-child a:hover { color: $hot; }
 
-/* ---- emphasis: **bold** glows white, *italic* is star-gold ---- */
-.markdown-body strong,
-.markdown-body b {
+// headings: color only, no added characters
+.markdown-body h1, .markdown-body h2, .markdown-body h3,
+.markdown-body h4, .markdown-body h5, .markdown-body h6 {
   color: $white;
-  font-weight: 600;
-  text-shadow: 0 0 5px $white;
-}
-.markdown-body em,
-.markdown-body i {
-  color: $star;
-  font-style: normal;
-  text-shadow: 0 0 5px $star;
-}
-
-/* ---- rules, quotes ---- */
-.markdown-body hr {
-  background: $border;
-  border: 0;
-  height: 1px;
-}
-.markdown-body blockquote {
-  color: $muted;
-  border-left: 0.25em solid $border;
-}
-
-/* ---- code ---- */
-.markdown-body code,
-.markdown-body tt,
-.markdown-body pre,
-.markdown-body .highlight,
-.markdown-body .highlight pre {
-  background: $bg-code;
-  color: $text;
-  font-family: inherit;
+  font: inherit;
   font-weight: 400;
+  border: 0;
 }
-.markdown-body code,
-.markdown-body tt {
+
+.markdown-body a { color: $link; text-decoration: none; }
+.markdown-body a:hover { color: $hot; }
+
+.markdown-body strong, .markdown-body b {
   color: $white;
-  border-radius: 0;
+  text-shadow: $glow;
 }
-.markdown-body pre,
-.markdown-body .highlight pre {
-  border: 1px solid $border;
-  border-radius: 0;
+.markdown-body em, .markdown-body i {
+  color: $gold;
+  font-style: normal;
+  text-shadow: $glow;
 }
-.markdown-body pre code {
+
+.markdown-body hr { background: $border; border: 0; height: 1px; }
+.markdown-body blockquote { color: $muted; border-left: 3px solid $border; }
+
+.markdown-body code, .markdown-body pre, .markdown-body .highlight {
+  background: $panel;
   color: $text;
+  font: inherit;
+  border-radius: 0;
 }
-/* flatten any syntax-highlight colors so code stays uniform */
-.markdown-body .highlight span,
-.markdown-body pre code * {
-  color: inherit !important;
-  background: transparent !important;
-}
-/* emphasis inside code keeps the star glow */
-.markdown-body code em,
-.markdown-body pre em {
-  color: $star;
-}
-.markdown-body kbd {
-  background: $bg-code;
-  color: $white;
-  border: 1px solid $border;
-  box-shadow: none;
-}
+.markdown-body pre { border: 1px solid $border; }
+// flatten syntax-highlight colors to keep code uniform
+.markdown-body .highlight * { color: inherit !important; background: transparent !important; }
 
-/* ---- tables ---- */
-.markdown-body table th,
-.markdown-body table td {
-  border: 1px solid $border;
-}
-.markdown-body table th {
-  color: $white;
-}
-.markdown-body table tr {
-  background: $bg;
-  border-top: 1px solid $border;
-}
-.markdown-body table tr:nth-child(2n) {
-  background: $bg-code;
-}
+.markdown-body table th, .markdown-body table td { border: 1px solid $border; }
+.markdown-body table tr { background: $bg; }
+.markdown-body table tr:nth-child(2n) { background: $panel; }
 
-/* ---- images ---- */
-.markdown-body img {
-  background: $bg;
-  border: 1px solid $border;
-  max-width: 100%;
-}
+.markdown-body img { background: $bg; border: 1px solid $border; max-width: 100%; }
