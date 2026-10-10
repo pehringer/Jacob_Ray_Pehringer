@@ -2,10 +2,16 @@ jacob.ray.pehringer@gmail.com
 
 # Experience
 
-**Fidelity Investments, Software Engineer IV**\
-**May 2023 - Present**
+**Fidelity Investments, Senior Software Engineer**\
+**January 2026 - Present**
 
-Currently developing and maintaining a microservice written in Go that provides market data for stocks, options, and cryptocurrencies.
+Technical lead of the market data microservice, responsible for its technical design decisions and priorities.
+Continue to develop and maintain the service's codebase and its vendor integrations for various asset types.
+
+**Fidelity Investments, Software Engineer IV**\
+**May 2023 - December 2025**
+
+Developed and maintained a microservice written in Go that provides market data for stocks, options, ETFs and cryptocurrencies.
 Responsible for abstracting the complexities of interfacing, requesting, and normalizing external vendor data for other internal microservices.
 
 **T.D. Williamson, Software Engineer**\
