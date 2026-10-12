@@ -14,7 +14,7 @@ Continue to develop and maintain the service's codebase and its vendor integrati
 Developed and maintained a microservice written in Go that provides market data for stocks, options, ETFs and cryptocurrencies.
 Responsible for abstracting the complexities of interfacing, requesting, and normalizing external vendor data for other internal microservices.
 
-**T.D. Williamson, Software Engineer**\
+**T.D. Williamson, Software Engineer I**\
 **January 2023 - February 2023**
 
 Worked on various agile teams completing kanban cards. Used a wide range of technologies (C++, Python, C#, C, Git, SVN to name a few).
